@@ -1,0 +1,20 @@
+crds:
+  enabled: true
+
+replicaCount: 1
+
+namespace: "kube-system"
+
+nodeSelector:
+  node: system
+
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::595144513341:role/_TMP_CERT_MANAGER
+
+securityContext:
+  fsGroup: 1001
+
+prometheus:
+  enabled: false
