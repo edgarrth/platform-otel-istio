@@ -1,0 +1,29 @@
+profile: ambient
+
+meshConfig:
+  accessLogFile: /dev/stdout
+  # accessLogEncoding: JSON
+  enableTracing: true
+  defaultConfig:
+    tracing: {}
+  extensionProviders:
+    - name: otel-traces
+      opentelemetry:
+        service: otel-collector.o11y.svc.cluster.local
+        port: 4317
+        grpc:
+          timeout: 10s
+        
+    - name: otel-logs
+      envoyOtelAls:
+        service: otel-collector.o11y.svc.cluster.local
+        port: 4317
+        logFormat:
+          labels:
+            pod: "%ENVIRONMENT(POD_NAME)%"
+            namespace: "%ENVIRONMENT(POD_NAMESPACE)%"
+            cluster: "%ENVIRONMENT(ISTIO_META_CLUSTER_ID)%"
+            mesh: "%ENVIRONMENT(ISTIO_META_MESH_ID)%"
+pilot:
+  env:
+    EXTERNAL_ISTIOD: false

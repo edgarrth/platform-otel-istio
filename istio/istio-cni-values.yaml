@@ -1,0 +1,5 @@
+profile: ambient
+
+global:
+  platform: k3d
+# platform: k3d para fedora wsl, para win usar k3s
