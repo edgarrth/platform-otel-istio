@@ -1,4 +1,4 @@
-cert-manager: (used by jaeger or otel installation, reason: grpc)
+cert-manager: (used by otel installation)
 -------------
     helm repo add jetstack https://charts.jetstack.io
     helm repo update
