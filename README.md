@@ -22,6 +22,16 @@ Grafana
     helm repo update
     helm upgrade --install k8s-monitoring grafana/k8s-monitoring -n grafana-agent --create-namespace --version 4.0.3 -f stack/otel/values-k8s-monitoring.yaml
 
+Grafana Agent
+---------------
+    kubectl -n prometheus create secret generic grafana-pdc-agent \
+     --from-literal="token=1212==" \
+     --from-literal="hosted-grafana-id=121212121" \
+     --from-literal="cluster=prod-us-east-0"
+    
+    kubectl -n prometheus apply -f https://raw.githubusercontent.com/grafana/pdc-agent/main/production/kubernetes/pdc-agent-deployment.yaml
+
+
 Auto Instrumentation
 --------------
     kubectl apply -f stack/otel/autoinstrumentation.yml
